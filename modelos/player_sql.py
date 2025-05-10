@@ -1,14 +1,11 @@
 from sqlalchemy import Column, Integer, Float, Boolean
-from db.database import Base
+from utils.conection_db import Base
+from sqlmodel import SQLModel, Field
 
-class PlayerModel(Base):
-    __tablename__ = "players"
+class PlayerModel(SQLModel, table=True):
+    __tablename__ = "players"  # Opcional: SQLModel puede generar esto automáticamente
 
-    id = Column(Integer, primary_key=True, index=True)
-    health = Column(Integer)
-    regenerate_health = Column(Integer)
-    speed = Column(Float)
-    jump = Column(Float)
-    is_dead = Column(Boolean)
-    armor = Column(Integer)
-    hit_speed = Column(Integer)
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    health: int
+    armor: int
